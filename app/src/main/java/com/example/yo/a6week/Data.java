@@ -9,7 +9,7 @@ import android.os.Parcelable;
 
 public class Data implements Parcelable {
     private String name = "";
-    private int number = 0;
+    private String number = "";
     private String menu1 = "";
     private String menu2 = "";
     private String menu3 = "";
@@ -23,7 +23,7 @@ public class Data implements Parcelable {
 
     protected Data(Parcel in) {
         name = in.readString();
-        number = in.readInt();
+        number = in.readString();
         menu1 = in.readString();
         menu2 = in.readString();
         menu3 = in.readString();
@@ -63,7 +63,7 @@ public class Data implements Parcelable {
     public int getCata() {
         return cata;
     }
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
     public String getHomepage() {
@@ -73,7 +73,7 @@ public class Data implements Parcelable {
         return date;
     }
 
-    public Data(String name, int number, String menu1, String menu2, String menu3, String homepage, String date, int cata) {
+    public Data(String name, String number, String menu1, String menu2, String menu3, String homepage, String date, int cata) {
         this.name = name;
         this.number = number;
         this.menu1 = menu1;
@@ -92,7 +92,7 @@ public class Data implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeInt(number);
+        dest.writeString(number);
         dest.writeString(menu1);
         dest.writeString(menu2);
         dest.writeString(menu3);

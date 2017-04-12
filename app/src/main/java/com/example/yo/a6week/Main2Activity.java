@@ -54,24 +54,32 @@ public class Main2Activity extends AppCompatActivity {
 
             long now = System.currentTimeMillis();
             Date date = new Date(now);
-            SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyy/MM/dd  HH:mm");
+            SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyy/MM/dd");
             final String strCurDate = CurDateFormat.format(date);
-            String name = etname.getText().toString();
-            int num = Integer.parseInt(ettel.getText().toString());
-            String menu1 = etmenu1.getText().toString();
-            String menu2 = etmenu2.getText().toString();
-            String menu3 = etmenu3.getText().toString();
-            String homepage = etaddr.getText().toString();
-            String when = strCurDate;
+            if(etname.getText().toString().length() == 0 || etmenu1.getText().toString().length() ==0 ||
+                    etmenu2.getText().toString().length() ==0 || etmenu3.getText().toString().length() ==0){
+                Toast.makeText(this, "정보를 입력해주세요", Toast.LENGTH_SHORT).show();
+            }else if(ettel.getText().toString().length() < 2){
+                Toast.makeText(this, "제대로된 번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                String name = etname.getText().toString();
+                String num = ettel.getText().toString();
+                String menu1 = etmenu1.getText().toString();
+                String menu2 = etmenu2.getText().toString();
+                String menu3 = etmenu3.getText().toString();
+                String homepage = etaddr.getText().toString();
+                String when = strCurDate;
 
-            Data res = new Data(name, num, menu1,menu2,menu3,homepage,when,cata);
-            intent.putExtra("restuarantdata", res);
-            intent.putExtra("resname",name);
-            setResult(1,intent);
-            finish();
+                Data res = new Data(name, num, menu1, menu2, menu3, homepage, when, cata);
+                intent.putExtra("restuarantdata", res);
+                intent.putExtra("resname", name);
+                setResult(1, intent);
+                finish();
+            }
 
         }
-        if(v.getId() == R.id.btnback){
+        if(v.getId() == R.id.btnCancel){
             finish();
         }
     }

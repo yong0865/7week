@@ -166,7 +166,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#ffffff"
-                android:padding="3dp" />
+                android:padding="3dp"
+                android:text="http://"/>
         </TableRow>
     </TableLayout>
     <LinearLayout

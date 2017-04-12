@@ -3,6 +3,7 @@ package com.example.yo.a6week;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     Data res;
     TextView tv;
     int count = 0;
-    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,36 +60,32 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//
+
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                creatDialog(view);
+            public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
+                AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
+                dlg.setTitle("삭제확인");
+                dlg.setIcon(R.drawable.res);
+                dlg.setMessage("선택한 맛집을 정말 삭제하시겠습니까?");
+                dlg.setNegativeButton("닫기",null);
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        resname.remove(position);
+                        reslist.remove(position);
+                        adapter.notifyDataSetChanged();
+                        count --;
+                        tv.setText("맛집리스트" + "(" + count + ")");
+                        Snackbar.make(view, "삭제되었습니다.", 1000).show();
+                    }
+                });
+                AlertDialog alertDialog = dlg.create();
+                alertDialog.show();
                 return true;
             }
         });
 
-    }
-
-
-
-    public void creatDialog(View view){
-        AlertDialog.Builder dlg = new AlertDialog.Builder(this);
-        dlg.setTitle("삭제확인");
-        dlg.setIcon(R.drawable.res);
-        dlg.setMessage("선택한 맛집을 정말 삭제하시겠습니까?");
-        dlg.setNegativeButton("닫기",null);
-        dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                resname.remove(position);
-                adapter.notifyDataSetChanged();
-                count --;
-                tv.setText("맛집리스트" + "(" + count + ")");
-            }
-        });
-        AlertDialog alertDialog = dlg.create();
-        alertDialog.show();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
