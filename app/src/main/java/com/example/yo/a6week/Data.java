@@ -16,6 +16,11 @@ public class Data implements Parcelable {
     private String homepage = "";
     private String date = "";
     private int cata = 1;
+    private boolean check = false;
+
+    public Data(boolean check){
+        this.check = check;
+    }
 
     public Data(String name){
         this.name = name;
@@ -47,7 +52,7 @@ public class Data implements Parcelable {
     public void setName(String name){
         this.name = name;
     }
-
+    public void setCheck(boolean check){ this.check = check;}
     public String getName() {
         return name;
     }
@@ -72,6 +77,7 @@ public class Data implements Parcelable {
     public String getDate() {
         return date;
     }
+    public boolean getCheck() {return  check;}
 
     public Data(String name, String number, String menu1, String menu2, String menu3, String homepage, String date, int cata) {
         this.name = name;

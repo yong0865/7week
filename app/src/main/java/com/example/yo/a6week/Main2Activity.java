@@ -49,7 +49,6 @@ public class Main2Activity extends AppCompatActivity {
             }if(radio3.isChecked()){
                 cata = 3;
             }
-
             Intent intent = getIntent();
 
             long now = System.currentTimeMillis();
